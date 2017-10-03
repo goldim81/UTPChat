@@ -28,7 +28,14 @@ public class Client implements Runnable{
                 e.printStackTrace();
             }
             String message = new String(packet.getData(), 0, packet.getLength());
-            System.out.println(message);
+            if (message.contains("roomPort:")) {
+                String[] strArr = message.split(":");
+                System.out.println(strArr[1]);
+                ChatClient.port = Integer.decode(strArr[1]);
+                System.out.println("Добро пожаловать в комнату.");
+            } else {
+                System.out.println(message);
+            }
             if (message.equals("quit")) break;
         }
     }

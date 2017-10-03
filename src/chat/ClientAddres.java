@@ -19,6 +19,10 @@ public class ClientAddres {
         return port;
     }
 
+    public boolean isSender(InetAddress addres, int port) {
+        return getAddres().equals(addres) & getPort()==port;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
