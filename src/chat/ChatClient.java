@@ -23,13 +23,13 @@ public class ChatClient {
         ds.send(new DatagramPacket(new byte[] {}, 0, ip, PORT));
 
         //Запрашивем список комнат
-        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-        byte[] packetMassiv = new byte[1024];
-        DatagramPacket pIn = new DatagramPacket(packetMassiv, 1024);
-        ds.receive(pIn);
-        System.out.println(new String(pIn.getData(), 0, pIn.getLength()));
+//        byte[] packetMassiv = new byte[1024];
+//        DatagramPacket pIn = new DatagramPacket(packetMassiv, 1024);
+//        ds.receive(pIn);
+//        System.out.println(new String(pIn.getData(), 0, pIn.getLength()));
 
         //Отсылаем выбранный номер комнаты
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         String room = reader.readLine();
         byte [] sendData = new byte[1024];
         sendData = room.getBytes();

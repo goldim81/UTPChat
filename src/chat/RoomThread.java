@@ -1,7 +1,5 @@
 package chat;
 
-import javax.xml.crypto.Data;
-import javax.xml.transform.Source;
 import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
@@ -13,9 +11,6 @@ public class RoomThread implements Runnable {
 
     private final String name;
     private final DatagramSocket ds;
-//        private byte[] packetMassiv = new byte[1024];
-    private DatagramPacket pIn = new DatagramPacket(new byte[1024], 1024);
-//    private DatagramPacket pOut;
     Set<ClientAddres> clientSet = new HashSet<>();
 
     public RoomThread(String name) throws SocketException {
@@ -25,11 +20,6 @@ public class RoomThread implements Runnable {
 
     public void addClient(ClientAddres clientAddres) {
         clientSet.add(clientAddres);
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
         sendMessage(clientAddres, ("roomPort:" + ds.getLocalPort()).getBytes());
     }
 
@@ -45,7 +35,9 @@ public class RoomThread implements Runnable {
 
     @Override
     public void run() {
+
         while (true) {
+            DatagramPacket pIn = new DatagramPacket(new byte[1024], 1024);
             try {
                 ds.receive(pIn);
             } catch (IOException e) {
